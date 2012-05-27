@@ -8,6 +8,24 @@
 	<string>text.html.erb.rails</string>
 	<key>settings</key>
 	<dict>
+		<key>decreaseIndentPattern</key>
+		<string>(?x)
+		^\s*
+		(&lt;/(?!html)
+		  [A-Za-z0-9]+\b[^&gt;]*&gt;
+		|--&gt;
+		|\}
+    |&lt;%\s*(else|end)
+  )</string>
+		<key>increaseIndentPattern</key>
+		<string>(?x)
+		&lt;(?!\?|area|base|br|col|frame|hr|html|img|input|link|meta|param|[^&gt;]*/&gt;)
+		  ([A-Za-z0-9]+)(?=\s|&gt;)\b[^&gt;]*&gt;(?!.*&lt;/\1&gt;)
+		|&lt;!--(?!.*--&gt;)
+		|\{[^}"']*$
+    |&lt;%\s* (if|else|elsif)
+    |(do|\{)(\s*\|[\w, ]+\|)?\s*%&gt;\s*$
+		</string>
 		<key>shellVariables</key>
 		<array>
 			<dict>
