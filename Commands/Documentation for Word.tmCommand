@@ -5,9 +5,8 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string>#!/usr/bin/env ruby
-url = "http://apidock.com/rails/search/quick?query=" + ENV['TM_CURRENT_WORD']
-puts "&lt;meta http-equiv='Refresh' content='0;URL=#{url}'&gt;"
+	<string>#!/usr/bin/env bash
+open "http://apidock.com/rails/search/quick?query=$TM_CURRENT_WORD"
 </string>
 	<key>fallbackInput</key>
 	<string>word</string>
@@ -18,7 +17,7 @@ puts "&lt;meta http-equiv='Refresh' content='0;URL=#{url}'&gt;"
 	<key>keyEquivalent</key>
 	<string>^h</string>
 	<key>name</key>
-	<string>Documentation for Word</string>
+	<string>Help (APIDock Rails)</string>
 	<key>outputCaret</key>
 	<string>afterOutput</string>
 	<key>outputFormat</key>
