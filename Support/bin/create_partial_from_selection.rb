@@ -53,9 +53,9 @@ if TextMate.selected_text
 
     # Return the new render :partial line
     if current_file.extension == "haml"
-      print "#{identing}= render :partial => '#{partial_name}'\n"
+      print "#{identing}= render \"#{partial_name}\"\n"
     else
-      print "#{identing}<%= render :partial => '#{partial_name}' %>\n"
+      print "#{identing}<%= render \"#{partial_name}\" %>\n"
     end
   else
     TextMate.exit_discard
