@@ -139,7 +139,7 @@ class RailsPath
   end
 
   # This is used in :file_type and :rails_path_for_view
-  VIEW_EXTENSIONS = %w( erb builder rhtml rxhtml rxml rjs haml )
+  VIEW_EXTENSIONS = %w( erb builder rhtml rxhtml rxml rjs haml js.coffee )
 
   def file_type
     return @file_type if @file_type
