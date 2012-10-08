@@ -9,7 +9,7 @@
 [[ -f "${TM_SUPPORT_PATH}/lib/bash_init.sh" ]] &amp;&amp; . "${TM_SUPPORT_PATH}/lib/bash_init.sh"
 
 RUBYLIB="$TM_BUNDLE_SUPPORT/lib:$RUBYLIB"
-"${TM_RUBY:=ruby}" -- "${TM_BUNDLE_SUPPORT}/bin/create_partial_from_selection.rb"
+/usr/bin/ruby -- "${TM_BUNDLE_SUPPORT}/bin/create_partial_from_selection.rb"
 </string>
 	<key>fallbackInput</key>
 	<string>line</string>
