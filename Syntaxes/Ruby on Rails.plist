@@ -265,7 +265,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(check_box|content_for|error_messages_for|form_for|fields_for|file_field|hidden_field|image_submit_tag|label|link_to|password_field|radio_button|submit|text_field|text_area)\b(?!:)</string>
+			<string>\b(check_box|content_for|error_messages_for|form_for|bootstrap_form_for|fields_for|file_field|hidden_field|image_submit_tag|label|link_to|email_field|password_field|radio_button|submit|text_field|text_area)\b(?!:)</string>
 			<key>name</key>
 			<string>support.function.viewhelpers.rails</string>
 		</dict>
