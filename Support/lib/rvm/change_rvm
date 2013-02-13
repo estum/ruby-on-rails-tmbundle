@@ -1,7 +1,28 @@
-if [[ -f "$HOME/.rvm/scripts/rvm" ]]; then
-  . "$HOME/.rvm/scripts/rvm"
-  rvm system
+#!/usr/bin/env bash
 
-  RUBYLIB="$TM_BUNDLE_SUPPORT/lib:$RUBYLIB"
-  "${TM_RUBY:=ruby}" -- "${TM_BUNDLE_SUPPORT}/lib/rvm/rvm.rb"
-fi
+function tm_apply_project_rvm_or_default () {
+	if [[ -f "$TM_PROJECT_DIRECTORY/.rvmrc" ]]; then
+		rvm rvmrc load "$TM_PROJECT_DIRECTORY"
+	else
+		rvm default
+	fi
+	# RUBYLIB="$TM_BUNDLE_SUPPORT/lib:$RUBYLIB"
+	"${TM_RUBY:=ruby}" -- "${TM_BUNDLE_SUPPORT}/lib/rvm/rvm.rb"
+}
+
+function tm_load_rvm () {
+	tm_rvm_local_path="$HOME/.rvm/"
+	tm_rvm_global_path="/usr/local/rvm/"
+	
+	if [[ -s "$tm_rvm_local_path/scripts/rvm" ]]; then
+		source "$tm_rvm_local_path/scripts/rvm"
+	elif [[ -s "$tm_rvm_global_path/scripts/rvm" ]]; then
+		source "$tm_rvm_global_path/scripts/rvm"
+	else
+		return 1
+	fi
+	
+	tm_apply_project_rvm_or_default
+}
+
+tm_load_rvm || exit 1

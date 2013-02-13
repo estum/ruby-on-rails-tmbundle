@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
 
-require "rails_bundle_tools"
+require File.join ENV['TM_BUNDLE_SUPPORT'], "lib", "rails_bundle_tools"
 require File.join(TextMate.support_path, "lib", "escape")
 require File.join(TextMate.support_path, "lib", "osx", "plist")
 
 module TextMate
   class RVM
-    CURRENT_RVM_VERSION = "1.0.11"
+    CURRENT_RVM_VERSION = "1.17.8"
     BUTTON_OK = '1'
     BUTTON_NEW_GEMSET = '3'
     
@@ -42,7 +42,10 @@ module TextMate
     def version
       @version ||= if installed?
         rvm_version = File.open("#{TextMate.project_directory}/.rvmrc").read
-        rvm_version[/rvm --create \s+(.*)/, 1].gsub('"', '')
+        _version, gemset, n = rvm_version.scan(/rvm\s+(?:\-{1,2}[a-z]+\s+)*+([\w\.\-]+)(?:@([\w\-]+))?(?:\s+-n\s+([\w\.-]+))?/).flatten
+        _version << "-#{n}" if !n.nil?
+        _version << "@#{gemset}" if !gemset.nil?
+        _version
       end
       
       return @version
@@ -66,15 +69,15 @@ module TextMate
     
     def gemsets
       @gemsets ||= rubies.collect do |ruby|
-        gemsets = `rvm #{ruby} gemset list`.split("\n")
-        gemsets.reject! { |e| e.empty? || e == 'global' || e =~ /^gemsets for/ }
+        gemsets = `rvm #{ruby} gemset list strings`.split
+        gemsets.reject! { |e| e.empty? || %w(#current * default).include?(e) }
 
         [ruby, gemsets.map { |g| "#{ruby}@#{g}" }]
       end.flatten
     end
     
     def create_rvmrc(gemset)
-      `(cd #{TextMate.project_directory}; rvm --create --rvmrc #{gemset}) > /dev/null`
+      `(cd #{TextMate.project_directory}; rvm rvmrc create #{gemset}) > /dev/null`
     end
     
   end

@@ -5,11 +5,12 @@
 # Description:
 #   Makes analyzing of a Rails path + filename easier.
 
-require 'rails/misc'
-require 'rails/text_mate'
-require 'rails/buffer'
-require 'rails/inflector'
+
 require 'fileutils'
+require File.join ENV['TM_BUNDLE_SUPPORT'], 'lib', 'rails/misc'
+require File.join ENV['TM_BUNDLE_SUPPORT'], 'lib', 'rails/text_mate'
+require File.join ENV['TM_BUNDLE_SUPPORT'], 'lib', 'rails/buffer'
+require File.join ENV['TM_BUNDLE_SUPPORT'], 'lib', 'rails/inflector'
 
 module AssociationMessages
   @@associations = {
@@ -303,8 +304,8 @@ class RailsPath
       :config => 'config',
       :lib => 'lib',
       :log => 'log',
-      :javascript => 'public/javascripts',
-      :stylesheet => wants_haml ? 'public/stylesheets/sass' : 'public/stylesheets',
+      :javascript => 'app/assets/javascripts',
+      :stylesheet => 'app/assets/stylesheets',
       :functional_test => 'test/functional',
       :unit_test => 'test/unit',
       :fixture => 'test/fixtures'}
